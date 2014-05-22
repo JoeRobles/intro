@@ -21,7 +21,10 @@
             Name: {{ enquiry.name }}<br>
             Subject: {{ enquiry.subject }}<br>
             Email: {{ enquiry.email }}<br>
-            Body: {{ enquiry.body }}
+            Body: {{ enquiry.body }}<br>
+            {% if sum is defined %}
+            Sum: {{ sum }}
+            {% endif %}
         {% else %}
     <form action="{{ path('intro_main_default_contact') }}" method="post" {{ form_enctype(form) }} class="blogger">
         {{ form_errors(form) }}

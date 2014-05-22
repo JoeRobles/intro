@@ -41,23 +41,36 @@ class DefaultController extends Controller
     {
         $enquiry = new Enquiry();
         $form = $this->createForm(new EnquiryType(), $enquiry);
-
+        
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+                $all = $request->request->all();
+
+                $a = $request->get("contact")["name"];
+                $b = $request->get("contact")["subject"];
+                $sum = $this->add($a, $b);
                 // Perform some action, such as sending an email
 
                 // Redirect - This is important to prevent users re-posting
                 // the form if they refresh the page
                 
 //                return $this->redirect($this->generateUrl('intro_main_default_index'), array('enquiry' => $enquiry));
-                return array('enquiry' => $enquiry);
+                return array(
+                    'enquiry' => $enquiry,
+                    'sum' => $sum
+                );
             }
         }
 
         return array(
             'form' => $form->createView()
         );
+    }
+    
+    public function add($a, $b)
+    {
+        return $a + $b;
     }
 }
