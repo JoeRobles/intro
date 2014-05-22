@@ -1,0 +1,39 @@
+{% extends 'IntroMainBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets output='css/contact.css' filter='cssrewrite' debug=false
+    'bundles/intromain/css/blog.css' %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block title %}Contact{% endblock%}
+
+{% block body %}
+    <header>
+        <h1>Contact symblog</h1>
+    </header>
+
+    <p>Want to contact symblog?</p>
+
+        {% if enquiry is defined %}
+            Name: {{ enquiry.name }}<br>
+            Subject: {{ enquiry.subject }}<br>
+            Email: {{ enquiry.email }}<br>
+            Body: {{ enquiry.body }}
+        {% else %}
+    <form action="{{ path('intro_main_default_contact') }}" method="post" {{ form_enctype(form) }} class="blogger">
+        {{ form_errors(form) }}
+
+        {{ form_row(form.name) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.subject) }}
+        {{ form_row(form.body) }}
+
+        {{ form_rest(form) }}
+
+        <input type="submit" value="Submit" />
+    </form>
+        {% endif %}
+{% endblock %}

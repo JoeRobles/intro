@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets output='css/layout.css' filter='cssrewrite' debug=false
+    'bundles/intromain/css/styles.css' %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block sidebar %}
+    Sidebar content
+{% endblock %}
